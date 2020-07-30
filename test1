@@ -1,0 +1,84 @@
+
+public class Helloworld {
+	public static void main(String[] args)
+	{
+		System.out.println("Hello,world.");
+	}
+}
+
+
+class VarEx1 {
+	public static void main(String[] args)
+	{ int year =0;
+	int age= 14;
+System.out.println(year);
+System.out.println(age);
+year = age+2000;
+age = age+1;
+System.out.println(year);
+System.out.println(age);
+	}}
+
+class VarEx2 {
+	public static void main (String[] args)
+	{
+		int x = 10;
+		int y = 20;
+		int tmp =0;
+		System.out.println("x:"+x+"y:"+y);
+		tmp =x;
+		x=y;
+		y=tmp;
+		System.out.println("x:"+x+"y:"+y);
+	}
+}
+
+
+
+class VarEx3 {
+	public static void main(String[] args)
+	{ final int MAX_SPEED= 200;
+	System.out.println("MAX_SPEED");
+	
+	final int MAX_VALUE=100;
+	System.out.println("int");
+	}
+}
+
+class VarEx4{
+	public static void main(String[] args)
+	{ String name = "7";
+	String str = name + "JAVA";
+	
+		System.out.println(name);
+		System.out.println(str);
+		System.out.println(7+" ");
+		System.out.println(77+" ");
+	}
+}
+class VarEx5 {
+	public static void main (String[] args)
+	{
+		byte b = 1;
+		short s = 2;
+		char c = 'A';
+		
+		int finger= 10;
+		long big = 100_000_000_000L; 
+		long hex = 0xFFFF_FFFF_FFFF_FFFFL;
+		
+		int octNum = 010;
+		int hexNum= 0x10;
+		int binNum= 0b10;
+		
+		float f2 = 1e1f;
+		float f3 = 3.14e3f;
+		
+		
+		System.out.printf("b=%o%n", b);
+		System.out.printf("s=%d%n", s);
+		System.out.printf("binNum=%s%n",Integer.toBinaryString(binNum));
+		System.out.printf("f2=%e,%g",f2,f3);
+	
+	}
+}
