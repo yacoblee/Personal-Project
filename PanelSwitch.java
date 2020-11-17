@@ -13,6 +13,7 @@ public class PanelSwitch extends JFrame {
 	public MainGui gui;
 	public Login login;
 	public Member member;
+	public Book book;
 	static PanelSwitch win = new PanelSwitch();
 	
 
@@ -32,27 +33,27 @@ public class PanelSwitch extends JFrame {
 			revalidate();
 			repaint();
 			break;
-//		case " ":
-//			
-//			getContentPane().removeAll();
-//			getContentPane().add(p3);
-//			revalidate();
-//			repaint();
-//		break;
 			
-//			case " ":
-//			
+		case "Book":
+			win.book = new Book(win);
+			getContentPane().removeAll();
+			getContentPane().add(book);
+			revalidate();
+			repaint();
+			break;
+		case " ":
+			
 //			getContentPane().removeAll();
 //			getContentPane().add(p3);
 //			revalidate();
 //			repaint();
-//		break;
-		}
+//			break;
 
+		}
 	}
 
 	public static void main(String[] args) {
-		
+
 		win.login = new Login(win);
 		win.add(win.login);
 

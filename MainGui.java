@@ -37,7 +37,7 @@ public class MainGui extends JPanel {
 		});
 		bt2.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
-				win.change("SPanel03"); //패널형태로 제작
+				win.change("Book"); //패널형태로 제작
 			}
 		});
 		bt3.addMouseListener(new MouseAdapter() {

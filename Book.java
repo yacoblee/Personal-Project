@@ -1,22 +1,11 @@
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.ScrollPane;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JSeparator;
-import javax.swing.JTable;
-import javax.swing.JTextField;
+import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
-
-public class Member extends JPanel {
-	
+public class Book extends JPanel {
 	/**
 	 * 
 	 */
@@ -27,7 +16,7 @@ public class Member extends JPanel {
 	private JTextField txname, txnum,txaddress;
 	private JLabel laname,lanum,laaddress;
 	
-	public Member (PanelSwitch win) {
+	public Book (PanelSwitch win) {
 		setLayout(null);
 		
 		Font f1 =new Font("한컴 윤체L", Font.BOLD, 15);
@@ -37,24 +26,32 @@ public class Member extends JPanel {
 		btEx = new JButton("삭제");
 		btEx.setBounds(816, 147, 127, 43);
 		
-		laname = new JLabel("이름");
+		laname = new JLabel("첵제목");
 		laname.setFont(f1);
 		laname.setBounds(714, 368, 62, 18);
 		txname =new JTextField();
-		txname.setBounds(816, 428, 192, 32);
+		txname.setBounds(816, 368, 224, 32);
 		
-		lanum=new JLabel("번호");
+		lanum=new JLabel("저자");
 		lanum.setFont(f1);
 		lanum.setBounds(714, 428, 62, 18);
 		txnum = new JTextField();
-		txnum.setBounds(816, 368, 192, 32);
+		txnum.setBounds(816, 428, 192, 32);
 		
 		
-		laaddress = new JLabel("주소");
+		laaddress = new JLabel("출판사");
 		laaddress.setFont(f1);
 		laaddress.setBounds(714, 486, 62, 18);
 		txaddress = new JTextField();
-		txaddress.setBounds(816, 486, 224, 32);
+		txaddress.setBounds(816, 486, 192, 32);
+		
+		JTextPane textPane_3 = new JTextPane(); //ISBN 코드 추가 필드
+		textPane_3.setBounds(816, 539, 192, 32);
+		add(textPane_3);
+		
+		JLabel label_4 = new JLabel("ISBN");
+		label_4.setBounds(714, 539, 62, 18);
+		add(label_4);
 		
 		bthome = new JButton("홈으로");
 		bthome.setBounds(913, 645, 127, 43);
@@ -71,33 +68,41 @@ public class Member extends JPanel {
 		separator_1.setBounds(0, 700, 1054, 17);
 		add(separator_1);
 		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(14, 74, 677, 586);
-		add(scrollPane);
+		
+		//scroll and separate
+		
+		
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(14, 92, 693, 569);
+		add(scrollPane_1);
 		
 		JTable table = new JTable();
+		scrollPane_1.setViewportView(table);
+		scrollPane_1.setBackground(Color.GRAY);
+		table = new JTable();
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
+				{null, null, null, null, null},
+				{null, null, null, null, null},
+				{null, null, null, null, null},
+				{null, null, null, null, null},
+				{null, null, null, null, null},
+				{null, null, null, null, null},
+				{null, null, null, null, null},
+				{null, null, null, null, null},
+				{null, null, null, null, null},
+				{null, null, null, null, null},
 			},
 			new String[] {
-				"이름", "전화번호", "주소"
+					"제목","저자","출판사","ISBN","대출현황"
 			}
 		));
-		table.getColumnModel().getColumn(0).setPreferredWidth(110);
-		table.getColumnModel().getColumn(1).setPreferredWidth(207);
-		table.getColumnModel().getColumn(2).setPreferredWidth(395);
-		scrollPane.setViewportView(table);
+		table.getColumnModel().getColumn(0).setPreferredWidth(292);
+		table.getColumnModel().getColumn(1).setPreferredWidth(94);
+		table.getColumnModel().getColumn(2).setPreferredWidth(93);
+		table.getColumnModel().getColumn(3).setPreferredWidth(159);
+		table.getColumnModel().getColumn(4).setPreferredWidth(87);
+		scrollPane_1.setViewportView(table);
 		
 		add(btIm);
 		add(btEx);
@@ -112,12 +117,11 @@ public class Member extends JPanel {
 		bthome.addActionListener(new ActionListener() {
 			
 			@Override
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(ActionEvent arg0) {
 				win.change("MainGui");
 				
 			}
 		});
-		
 	}
 	
 }
