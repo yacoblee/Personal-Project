@@ -11,20 +11,19 @@ public class MainGui extends JPanel {
 
 	public MainGui (PanelSwitch win) {
 		setLayout(null);
-		setSize(300,800);
-		setLocation(600,0);
-		
-		
+		setSize(1100,300);
+		setLocation(0,0);
 		setBackground(Color.BLACK);
+		
 		JButton bt1 =new JButton("회원관리"); //목록과 관리(가입,조회)
 		JButton bt2	=new JButton("도서관리");
 		JButton bt3 =new JButton("책등록");
 		JButton exi =new JButton("종료");
 		
-		bt1.setBounds(900, 130, 100, 50);
-		bt2.setBounds(900, 230, 100, 50);
-		bt3.setBounds(900, 330, 100, 50);
-		exi.setBounds(900, 430, 100, 50);
+		bt1.setBounds(520, 50, 100, 50);
+		bt2.setBounds(640, 50, 100, 50);
+		bt3.setBounds(760, 50, 100, 50);
+		exi.setBounds(880, 50, 100, 50);
 		
 		add(bt1);
 		add(bt2);
@@ -33,7 +32,7 @@ public class MainGui extends JPanel {
 		
 		bt1.addMouseListener(new MouseAdapter() {
 		public void mousePressed(MouseEvent e) {
-			win.change("SPanel02"); //패널 형태로 제작
+			win.change("Member"); //패널 형태로 제작
 		}
 		});
 		bt2.addMouseListener(new MouseAdapter() {
