@@ -13,7 +13,7 @@ public class MainGui extends JPanel {
 		setLayout(null);
 		setSize(1100,300);
 		setLocation(0,0);
-		setBackground(Color.BLACK);
+		
 		
 		JButton bt1 =new JButton("회원관리"); //목록과 관리(가입,조회)
 		JButton bt2	=new JButton("도서관리");
@@ -42,7 +42,7 @@ public class MainGui extends JPanel {
 		});
 		bt3.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
-				win.change("SPanel03");
+				win.change("Manage");
 			}
 		});
 		exi.addMouseListener(new MouseAdapter() {

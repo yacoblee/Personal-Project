@@ -14,6 +14,7 @@ public class PanelSwitch extends JFrame {
 	public Login login;
 	public Member member;
 	public Book book;
+	public Manage manage;
 	static PanelSwitch win = new PanelSwitch();
 	
 
@@ -41,13 +42,13 @@ public class PanelSwitch extends JFrame {
 			revalidate();
 			repaint();
 			break;
-		case " ":
-			
-//			getContentPane().removeAll();
-//			getContentPane().add(p3);
-//			revalidate();
-//			repaint();
-//			break;
+		case "Manage":
+			win.manage = new Manage(win);
+			getContentPane().removeAll();
+			getContentPane().add(manage);
+			revalidate();
+			repaint();
+			break;
 
 		}
 	}
