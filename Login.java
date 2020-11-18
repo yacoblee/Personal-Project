@@ -35,6 +35,7 @@ public class Login extends JPanel {
 	public Login(PanelSwitch win) {
 		setSize(1100, 800);
 		setLayout(null);
+		setVisible(true);
 		f1 = new Font("HYµø≥ËM", Font.PLAIN, 15);
 		f2 = new Font("Hight Tower Text", Font.BOLD, 23);
 

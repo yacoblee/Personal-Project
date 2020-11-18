@@ -27,6 +27,7 @@ public class PanelSwitch extends JFrame {
 			revalidate();
 			repaint();
 			break;
+			
 		case "Member" :
 			win.member= new Member(win); 
 			getContentPane().removeAll();
@@ -47,7 +48,7 @@ public class PanelSwitch extends JFrame {
 			getContentPane().removeAll();
 			getContentPane().add(manage);
 			revalidate();
-			repaint();
+			paint(this.getGraphics());
 			break;
 
 		}

@@ -13,7 +13,7 @@ public class MainGui extends JPanel {
 		setLayout(null);
 		setSize(1100,300);
 		setLocation(0,0);
-		
+		setVisible(true);
 		
 		JButton bt1 =new JButton("회원관리"); //목록과 관리(가입,조회)
 		JButton bt2	=new JButton("도서관리");
