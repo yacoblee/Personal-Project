@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -41,16 +42,19 @@ public class Login extends JPanel {
 		JLabel lbImage = new JLabel(ic);
 		add(lbImage);
 
-		f1 = new Font("HY동녘M", Font.PLAIN, 15);
-		f2 = new Font("Hight Tower Text", Font.BOLD, 23);
-
+		f1 = new Font("HY동녘M", Font.PLAIN, 17);
+		f2 = new Font("Hight Tower Text", Font.BOLD, 25);
+		
 		JLabel title = new JLabel("도서관리 프로그램");
-		title.setBounds(500, 70, 200, 100);
+		
+		title.setForeground(Color.white);
+		title.setBounds(500, 70, 300, 100);
 		title.setFont(f2);
 
 		lbImage.add(title);
 
 		JLabel inputid = new JLabel("아이디: ");
+		inputid.setForeground(Color.white);
 		inputid.setBounds(380, 170, 100, 50);
 		inputid.setFont(f1);
 		lbImage.add(inputid);
@@ -60,6 +64,7 @@ public class Login extends JPanel {
 		lbImage.add(text);
 		
 		JLabel inputpass = new JLabel("암호:");
+		inputpass.setForeground(Color.white);
 		inputpass.setBounds(400, 230, 100, 50);
 		inputpass.setFont(f1);
 		
