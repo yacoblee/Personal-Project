@@ -1,3 +1,4 @@
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -33,9 +34,13 @@ public class Login extends JPanel {
 	}
 
 	public Login(PanelSwitch win) {
-		setSize(1100, 800);
-		setLayout(null);
-		setVisible(true);
+
+		setBounds(0, 0, 1080, 740);
+
+		ImageIcon ic = new ImageIcon("C:\\Users\\pc\\Desktop\\bookimage.jpg");
+		JLabel lbImage = new JLabel(ic);
+		add(lbImage);
+
 		f1 = new Font("HY동녘M", Font.PLAIN, 15);
 		f2 = new Font("Hight Tower Text", Font.BOLD, 23);
 
@@ -43,28 +48,30 @@ public class Login extends JPanel {
 		title.setBounds(500, 70, 200, 100);
 		title.setFont(f2);
 
-		add(title);
+		lbImage.add(title);
 
 		JLabel inputid = new JLabel("아이디: ");
 		inputid.setBounds(380, 170, 100, 50);
 		inputid.setFont(f1);
-		add(inputid);
+		lbImage.add(inputid);
 
 		text = new JTextField(10);
 		text.setBounds(450, 180, 200, 30);
-		add(text);
+		lbImage.add(text);
+		
 		JLabel inputpass = new JLabel("암호:");
 		inputpass.setBounds(400, 230, 100, 50);
 		inputpass.setFont(f1);
-		add(inputpass);
+		
+		lbImage.add(inputpass);
 		passfield = new JPasswordField();
 		passfield.setBounds(450, 240, 200, 30);
-		add(passfield);
+		lbImage.add(passfield);
 
 		JButton btJoin = new JButton("로그인");
 		btJoin.setSize(80, 50);
 		btJoin.setLocation(665, 200);
-		add(btJoin);
+		lbImage.add(btJoin);
 
 		btJoin.addMouseListener(new MouseAdapter() {
 			@SuppressWarnings("deprecation")
@@ -78,5 +85,23 @@ public class Login extends JPanel {
 
 		});
 
+	}
+
+}
+
+class ImagePanel extends JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private Image img;
+
+	public ImagePanel(Image img) {
+		this.img = img;
+		setSize(new Dimension(img.getWidth(null), img.getHeight(null)));
+	}
+
+	public void painComponent(Graphics g) {
+		g.drawImage(img, 0, 0, null);
 	}
 }

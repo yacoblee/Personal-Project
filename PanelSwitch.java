@@ -2,6 +2,7 @@ import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -55,8 +56,10 @@ public class PanelSwitch extends JFrame {
 	}
 
 	public static void main(String[] args) {
-
+		
+		
 		win.login = new Login(win);
+	
 		win.add(win.login);
 
 		win.setTitle("library");
