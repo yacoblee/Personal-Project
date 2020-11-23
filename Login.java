@@ -3,6 +3,8 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -89,6 +91,16 @@ public class Login extends JPanel {
 			}
 
 		});
+		
+		passfield.addKeyListener(new KeyAdapter()  {
+	         public void keyPressed(KeyEvent e)
+	         {
+	           if (e.getKeyCode() == 10)
+	           {
+	        	   win.change("MainGui");
+	           }
+	         }
+	       });
 
 	}
 

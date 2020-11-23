@@ -19,7 +19,7 @@ public class Manage extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private JButton btnNewButton, button, button_1, button_2;
 	private JTextField textField, textField_1, textField_2, textField_3;
-	
+	static Diallog dial;
 	public Manage(PanelSwitch win) {
 
 		setVisible(true);
@@ -51,16 +51,8 @@ public class Manage extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				
-//				JInternalFrame intenal = new JInternalFrame("책 대여");
-//				
-//				intenal.setBackground(Color.darkGray);
-//				intenal.setBounds(230,366,404,240);
-//				intenal.setLayout(null);
-//				intenal.setVisible(true);
-//
-//				jpn1.add(intenal);
-
-				JOptionPane.showInputDialog("대여 회원 전화번호");
+				dial = new Diallog();
+				dial.dispose();
 			}
 		});
 		
@@ -73,19 +65,13 @@ public class Manage extends JPanel {
 		
 		
 		
+		
 		button_1.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-//				JInternalFrame intenal = new JInternalFrame("책 대여");
-//				intenal.setBackground(Color.darkGray);
-//				intenal.setBounds(230,366,404,240);
-//				intenal.setLayout(null);
-//				intenal.setVisible(true);
-//
-//				jpn1.add(intenal);
-
-				JOptionPane.showInputDialog("반납 회원 전화번호");
+				dial = new Diallog();
+				dial.dispose();
 			}
 		});
 		

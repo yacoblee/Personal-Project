@@ -27,7 +27,7 @@ public class MainGui extends JPanel {
 		
 		JButton bt1 =new JButton("회원관리"); //목록과 관리(가입,조회)
 		JButton bt2	=new JButton("도서관리");
-		JButton bt3 =new JButton("책등록");
+		JButton bt3 =new JButton("대여 관리");
 		JButton exi =new JButton("종료");
 		
 		bt1.setFont(f1);
