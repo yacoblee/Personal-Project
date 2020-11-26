@@ -19,7 +19,7 @@ public class PanelSwitch extends JFrame {
 	static PanelSwitch win = new PanelSwitch();
 	
 
-	public void change(String name) {
+	public void change(String name)  {
 		switch (name) {
 		case "MainGui":
 			win.gui = new MainGui(win);

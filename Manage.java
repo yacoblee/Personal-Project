@@ -20,6 +20,7 @@ public class Manage extends JPanel {
 	private JButton btnNewButton, button, button_1, button_2;
 	private JTextField textField, textField_1, textField_2, textField_3;
 	static Diallog dial;
+
 	public Manage(PanelSwitch win) {
 
 		setVisible(true);
@@ -32,9 +33,6 @@ public class Manage extends JPanel {
 		jpn1.setBounds(62, 30, 970, 491);
 
 		add(jpn1);
-		
-	
-		
 
 		btnNewButton = new JButton("조희");
 		btnNewButton.setFont(new Font("굴림", Font.BOLD, 17));
@@ -45,38 +43,30 @@ public class Manage extends JPanel {
 		button.setFont(new Font("굴림", Font.BOLD, 17));
 		button.setBounds(620, 168, 125, 46);
 		jpn1.add(button);
-		
+
 		button.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				
+
 				dial = new Diallog();
 				dial.dispose();
 			}
 		});
-		
-		
-		
+
 		button_1 = new JButton("반납");
 		button_1.setFont(new Font("굴림", Font.BOLD, 17));
 		button_1.setBounds(620, 238, 125, 46);
 		jpn1.add(button_1);
-		
-		
-		
-		
+
 		button_1.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				dial = new Diallog();
 				dial.dispose();
 			}
 		});
-		
-		
-		
 
 		button_2 = new JButton("메인홈");
 		button_2.setFont(new Font("굴림", Font.BOLD, 17));
@@ -138,70 +128,19 @@ public class Manage extends JPanel {
 		add(jpn2);
 		jpn2.setBounds(66, 547, 970, 174);
 		jpn2.setBackground(SystemColor.activeCaption);
-		
+
 		JScrollPane scroll = new JScrollPane();
-		scroll.setBounds(0,0,970,174);
+		scroll.setBounds(0, 0, 970, 174);
 		jpn2.add(scroll);
-		
-		JTable jtable = new JTable();
+
+		String[] colNames = new String[] { "제목", "저자", "출판사", "대출현황", "대출날짜" };
+		DefaultTableModel model3 = new DefaultTableModel(colNames, 0);
+		JTable jtable = new JTable(model3);
 		scroll.setViewportView(jtable);
-		jtable.setModel(new DefaultTableModel(
-						new Object[][] {
-							{ null, null, null, null }, 
-							{ null, null, null, null },
-							{ null, null, null, null },
-							{ null, null, null, null } 
-							},
-						
-				new String[] { "제목", "저자", "ISBN", "대여정보" })
-			{
-					/**
-					 * 
-					 */
-					private static final long serialVersionUID = 1L;
-					Class[] columnTypes = new Class[] {
-			String.class, String.class, String.class, String.class };
 
-					public Class getColumnClass(int columnIndex) {
-						return columnTypes[columnIndex];
-					}
-
-				});
-		jtable.getColumnModel().getColumn(0).setPreferredWidth(135);
-		jtable.getColumnModel().getColumn(1).setPreferredWidth(186);
-		jtable.getColumnModel().getColumn(2).setPreferredWidth(208);
-		jtable.getColumnModel().getColumn(3).setPreferredWidth(191);
 		jtable.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 
+		String[] rows = new String[5];
+		model3.addRow(rows);
 	}
-
 }
-//
-//class newWindow extends JFrame{
-//	
-//	public newWindow() {
-//		
-//	
-//	setSize(400,260);
-//	setLayout(null);
-//	JLabel lb= new JLabel("입력");
-//	lb.setFont(new Font("Tahoma", Font.PLAIN, 25));
-//	lb.setBounds(100,30,200,50);
-//	
-//	JTextField field = new JTextField(10);
-//	field.setBounds(100,80,200, 30);
-//	
-//	JButton btn = new JButton("입력");
-//	btn.setBounds(100,130,200,40);
-//	
-//	btn.addActionListener(new ActionListener() {
-//		
-//		@Override
-//		public void actionPerformed(ActionEvent e) {
-//			lb.setText(field.getText());
-//			dispose();
-//			
-//		}
-//	});
-//	}
-//}

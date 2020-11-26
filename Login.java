@@ -84,6 +84,7 @@ public class Login extends JPanel {
 			@SuppressWarnings("deprecation")
 			public void mousePressed(MouseEvent e) {
 				if (text.getText().equals(getId()) && passfield.getText().equals(getPassword())) {
+					JOptionPane.showMessageDialog(null,"로그인 되었습니다.");
 					win.change("MainGui");
 				} else {
 					JOptionPane.showMessageDialog(null, "아이디와 암호를 확인해주세요.");
@@ -96,7 +97,7 @@ public class Login extends JPanel {
 	         public void keyPressed(KeyEvent e)
 	         {
 	           if (e.getKeyCode() == 10)
-	           {
+	           {JOptionPane.showMessageDialog(null,"로그인 되었습니다.");
 	        	   win.change("MainGui");
 	           }
 	         }
@@ -106,19 +107,19 @@ public class Login extends JPanel {
 
 }
 
-class ImagePanel extends JPanel {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	private Image img;
-
-	public ImagePanel(Image img) {
-		this.img = img;
-		setSize(new Dimension(img.getWidth(null), img.getHeight(null)));
-	}
-
-	public void painComponent(Graphics g) {
-		g.drawImage(img, 0, 0, null);
-	}
-}
+//class ImagePanel extends JPanel {
+//	/**
+//	 * 
+//	 */
+//	private static final long serialVersionUID = 1L;
+//	private Image img;
+//
+//	public ImagePanel(Image img) {
+//		this.img = img;
+//		setSize(new Dimension(img.getWidth(null), img.getHeight(null)));
+//	}
+//
+//	public void painComponent(Graphics g) {
+//		g.drawImage(img, 0, 0, null);
+//	}
+//}

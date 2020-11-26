@@ -3,10 +3,15 @@ import java.awt.Font;
 import java.awt.ScrollPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
@@ -16,7 +21,13 @@ import javax.swing.table.DefaultTableModel;
 
 
 public class Member extends JPanel {
-	
+	String driver = "oracle.jdbc.driver.OracleDriver";
+	String url = "jdbc:oracle:thin:@localhost:1521/ORCL";
+	String user = "green";
+	String password = "green1234";
+	private Connection con;
+	private Statement stmt;
+	private ResultSet rs;
 	/**
 	 * 
 	 */
@@ -28,9 +39,22 @@ public class Member extends JPanel {
 	private JLabel laname,lanum,laaddress;
 	
 	public Member (PanelSwitch win) {
+		
+		try {
+			Class.forName(driver);
+			System.out.println("jdbc driver loading success");
+			con = DriverManager.getConnection(url, user, password);
+			System.out.println("oracle connection success");
+			stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+			System.out.println("statement create success");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		setLayout(null);
 		
 		Font f1 =new Font("한컴 윤체L", Font.BOLD, 15);
+		
+		
 		
 		btIm = new JButton("등록");
 		btIm.setBounds(816, 80, 127, 43);
@@ -75,28 +99,9 @@ public class Member extends JPanel {
 		scrollPane.setBounds(14, 74, 677, 586);
 		add(scrollPane);
 		
-		JTable table = new JTable();
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-			},
-			new String[] {
-				"이름", "전화번호", "주소"
-			}
-		));
-		table.getColumnModel().getColumn(0).setPreferredWidth(110);
-		table.getColumnModel().getColumn(1).setPreferredWidth(207);
-		table.getColumnModel().getColumn(2).setPreferredWidth(395);
+		String[] colNames = new String[] { "이름", "전화번호", "주소" };
+		DefaultTableModel model0 = new DefaultTableModel(colNames, 0);
+		JTable table = new JTable(model0);
 		scrollPane.setViewportView(table);
 		
 		add(btIm);
@@ -109,6 +114,67 @@ public class Member extends JPanel {
 		add(txaddress);
 		add(bthome);
 		
+//		try {
+//		String sql = "select * from client";
+//		stmt = con.prepareStatement(sql);
+//		rs= stmt.executeQuery(sql);
+//		
+//		while (rs.next()) {
+//			String name = rs.getString("MNAME");
+//			String num = rs.getString("MPHONE");
+//			String address = rs.getString("MADDRESS");
+//			
+//			Object data[] = {name,num,address};
+//			model0.addRow(data);
+//		}
+//	
+//	
+//	}catch (Exception e) {
+//		// TODO: handle exception
+//	}
+		
+		
+		btIm.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					String name = txname.getText();
+					String number = txnum.getText();
+					String address = txaddress.getText();
+					
+					System.out.println(name.length());
+					System.out.println(number.length());
+					System.out.println(address.length());
+					if (number.length() >= 1 && name.length() > 10 && address.length() >= 5) {
+
+						String query = "INSERT INTO CLIENT VALUES('" + number + "','" + name + "','" + address + "')";
+						System.out.println(query);
+						rs = stmt.executeQuery(query);
+						
+						String sql = "select * from client";
+						stmt = con.prepareStatement(sql);
+						rs= stmt.executeQuery(sql);
+						
+						while (rs.next()) {
+							name = rs.getString("MNAME");
+							number = rs.getString("MPHONE");
+							address = rs.getString("MADDRESS");
+							
+							Object data[] = {name,number,address};
+							model0.addRow(data);
+						}
+					} else {
+						JOptionPane.showConfirmDialog(null, "입력 정보를 확인해주세요");
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+
+			}
+		});
+		
+		
 		bthome.addActionListener(new ActionListener() {
 			
 			@Override
@@ -119,5 +185,4 @@ public class Member extends JPanel {
 		});
 		
 	}
-	
 }
