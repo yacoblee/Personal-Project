@@ -20,9 +20,12 @@ public class Manage extends JPanel {
 	private JButton btnNewButton, button, button_1, button_2;
 	private JTextField textField, textField_1, textField_2, textField_3;
 	static Diallog dial;
+	static PanelSwitch sw;
 
 	public Manage(PanelSwitch win) {
-
+		
+		sw = new PanelSwitch(); //connect database
+		
 		setVisible(true);
 		setLayout(null);
 

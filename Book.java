@@ -13,13 +13,7 @@ public class Book extends JPanel {
 	/**
 	 * 
 	 */
-	String driver = "oracle.jdbc.driver.OracleDriver";
-	String url = "jdbc:oracle:thin:@localhost:1521/ORCL";
-	String user = "green";
-	String password = "green1234";
-	private Connection con;
-	private Statement stmt;
-	private ResultSet rs;
+
 
 	private static final long serialVersionUID = 1L;
 	private JButton btIm, btEx, bthome;
@@ -27,8 +21,9 @@ public class Book extends JPanel {
 	private JList list;
 	private JTextField txname, txnum, txaddress;
 	private JLabel laname, lanum, laaddress;
-	
+	static PanelSwitch sw;
 	public Book(PanelSwitch win) {
+		sw = new PanelSwitch();
 		setLayout(null);
 		
 		Font f1 = new Font("ÇÑÄÄ À±Ã¼L", Font.BOLD, 15);
@@ -129,17 +124,5 @@ public class Book extends JPanel {
 			}
 		});
 	}
-
-	public void connDB() {
-		try {
-			Class.forName(driver);
-			System.out.println("jdbc driver loading success");
-			con = DriverManager.getConnection(url, user, password);
-			System.out.println("oracle connection success");
-			stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-			System.out.println("statement create success");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 }
+

@@ -1,6 +1,10 @@
 import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -10,6 +14,19 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
 public class PanelSwitch extends JFrame {
+	
+	
+	String driver = "oracle.jdbc.driver.OracleDriver";
+	String url = "jdbc:oracle:thin:@localhost:1521/ORCL";
+	String user = "green";
+	String password = "green1234";
+	static Connection con;
+	@SuppressWarnings("unused")
+	private Statement stmt;
+	@SuppressWarnings("unused")
+	private ResultSet rs;
+	
+	
 	private static final long serialVersionUID = 1L;
 	public MainGui gui;
 	public Login login;
@@ -20,6 +37,17 @@ public class PanelSwitch extends JFrame {
 	
 
 	public void change(String name)  {
+		try {
+			Class.forName(driver);
+			System.out.println("jdbc driver loading success");
+			con = DriverManager.getConnection(url, user, password);
+			System.out.println("oracle connection success");
+			stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+			System.out.println("statement create success");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 		switch (name) {
 		case "MainGui":
 			win.gui = new MainGui(win);

@@ -17,8 +17,10 @@ public class Diallog extends JFrame {
 	private JFrame frame;
 	private JTextField textField;
 	private JTextField textField_1;
+	static PanelSwitch sw;
 
 	public Diallog() {
+		sw = new PanelSwitch();
 		frame = new JFrame();
 		frame.setSize(581, 726);
 		frame.getContentPane().setLayout(null);
@@ -52,7 +54,7 @@ public class Diallog extends JFrame {
 		label_1.setFont(new Font("HY°­M", Font.PLAIN, 17));
 		label_1.setBounds(60, 59, 80, 18);
 		panel.add(label_1);
-		
+
 		frame.setVisible(true);
 	}
 
