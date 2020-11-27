@@ -216,8 +216,16 @@ public class Member extends JPanel {
 		btEx.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-			String sql = "DELETE FROM client WHERE ROWNUM = ";
-			
+//			String sql = "DELETE FROM client WHERE ROWNUM = ";
+			int rows = table.getSelectedRow();
+			if(rows==-1) {
+				JOptionPane.showMessageDialog(table, "행을 선택해주세요");
+			return ;
+			}else {
+			DefaultTableModel model0= (DefaultTableModel) table.getModel();
+				model0.removeRow(rows);
+				System.out.println("remove the"+rows);
+			}
 			
 			}
 		});
