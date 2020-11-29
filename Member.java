@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -39,7 +40,11 @@ public class Member extends JPanel {
 	private JLabel laname, lanum, laaddress;
 	static PanelSwitch sw;
 	static MemberDao dao;
-
+	
+	PreparedStatement ptst =null;
+	int removeNum =0;
+	String[] colNames = new String[] { "이름", "전화번호", "주소" };
+	DefaultTableModel model0 = new DefaultTableModel(colNames, 0);
 	public Member(PanelSwitch win) {
 //		dao = new MemberDao();
 
@@ -103,8 +108,6 @@ public class Member extends JPanel {
 		scrollPane.setBounds(14, 74, 677, 586);
 		add(scrollPane);
 
-		String[] colNames = new String[] { "이름", "전화번호", "주소" };
-		DefaultTableModel model0 = new DefaultTableModel(colNames, 0);
 		JTable table = new JTable(model0);
 		scrollPane.setViewportView(table);
 
@@ -119,33 +122,16 @@ public class Member extends JPanel {
 		add(bthome);
 
 		try { // first visible table
-			ArrayList<MemberVo> list = new ArrayList<MemberVo>();
+		
 
-			String query = "SELECT * FROM CLIENT ";
-
-			System.out.println("SQL : " + query);
-
+			String query = "SELECT * FROM CLIENT ORDER BY MNAME";
+			stmt= con.createStatement();
 			rs = stmt.executeQuery(query);
-			rs.last();
-			System.out.println("rs.getRow() : " + rs.getRow());
-
-			if (rs.getRow() == 0) {
-				System.out.println("0 row selected...");
-			} else {
-				System.out.println(rs.getRow() + "rows selected");
-				rs.first();
 				while (rs.next()) {
-					String name = rs.getString("MNAME");
-					String number = rs.getString("MPHONE");
-					String address = rs.getString("MADDRESS");
-
-					MemberVo data = new MemberVo(name, number, address);
-					list.add(data);
-
-					Object data1[] = { name, number, address };
-					model0.addRow(data1);
+					model0.addRow(new Object[] {rs.getString("MNAME"),rs.getString("MPHONE"),rs.getString("MADDRESS") });
+					removeNum++;
 				}
-			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -158,49 +144,39 @@ public class Member extends JPanel {
 					String name = txname.getText();
 					String number = txnum.getText().toString();
 					String address = txaddress.getText();
-					System.out.println(name + " " + number + " " + address);
+					
+//					System.out.println(name + " " + number + " " + address);
+					
 					if (name.length() >= 1 && number.length() > 10 && address.length() >= 5) {
 
-						String query = "INSERT INTO CLIENT VALUES('" + name + "','" + number + "','" + address + "')";
-						System.out.println(query);
-						rs = stmt.executeQuery(query);
-						query ="commit";
+						String sql = "INSERT INTO CLIENT VALUES('" + name + "','" + number + "','" + address + "')";
+						System.out.println(sql);
+						rs = stmt.executeQuery(sql);
+						sql ="commit";
+						rs=stmt.executeQuery(sql);
+						System.out.println(sql);
+						
+						
+						for(int i=removeNum-1;i>=0;i--) {
+							model0.removeRow(i);
+						}
+						removeNum=0;
+						
+						String query= "SELECT * FROM CLIENT ORDER BY MNAME";
+						stmt=con.createStatement();
 						rs=stmt.executeQuery(query);
+						while(rs.next()) {
+							model0.addRow(new Object[] {rs.getString("MNAME"),rs.getString("MPHONE"),rs.getString("MADDRESS")});
+							removeNum++;
+						}
+						txname.setText("");
+						txnum.setText("");
+						txaddress.setText("");
 					} else {
 						JOptionPane.showConfirmDialog(null, "입력 정보를 확인해주세요");
 					}
 
-									try { // table visible
-										ArrayList<MemberVo> list = new ArrayList<MemberVo>();
-				
-										String query = "SELECT * FROM CLIENT ";
-										rs = stmt.executeQuery(query);
-										rs.last();
-										System.out.println("rs.getRow() : " + rs.getRow());
-				
-										if (rs.getRow() == 0) {
-											System.out.println("0 row selected...");
-										} else {
-											System.out.println(rs.getRow() + "rows selected");
-											rs.previous();
-											while (rs.next()) {
-												name = rs.getString("MNAME");
-												number = rs.getString("MPHONE");
-												address = rs.getString("MADDRESS");
-				
-												MemberVo data = new MemberVo(name, number, address);
-												list.add(data);
-												name = rs.getString("MNAME");
-												number = rs.getString("MPHONE");
-												address = rs.getString("MADDRESS");
-				
-												Object data1[] = { name, number, address };
-												model0.addRow(data1);
-											}
-										}
-									} catch (Exception e) {
-										e.printStackTrace();
-									}
+									
 
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -211,56 +187,47 @@ public class Member extends JPanel {
 
 		btEx.addActionListener(new ActionListener() {
 			// remove rows
+			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					int rows = table.getSelectedRow()+1;
-					if (rows == -1) {
+					int rows = table.getSelectedRow();
+					if (rows < 0) {
 						JOptionPane.showMessageDialog(table, "행을 선택해주세요");
 						return;
 					} else {
-						DefaultTableModel model0 = (DefaultTableModel) table.getModel();
-						String sql = "DELETE FROM client WHERE ROWNUM = ";
-						sql = sql + rows;
-						System.out.println(sql);
-						rs = stmt.executeQuery(sql);
-
-						model0.removeRow(rows-1);
-						System.out.println("remove the" + rows);
-					}
-					
-					
-					
-					try { // first visible table
-						ArrayList<MemberVo> list = new ArrayList<MemberVo>();
-
-						String query = "SELECT * FROM CLIENT ";
-
-						System.out.println("SQL : " + query);
-
-						rs = stmt.executeQuery(query);
-						rs.last();
-						System.out.println("rs.getRow() : " + rs.getRow());
-
-						if (rs.getRow() == 0) {
-							System.out.println("0 row selected...");
-						} else {
-							System.out.println(rs.getRow() + "rows selected");
-							rs.previous();
-							while (rs.next()) {
-								String name = rs.getString("MNAME");
-								String number = rs.getString("MPHONE");
-								String address = rs.getString("MADDRESS");
-
-								MemberVo data = new MemberVo(name, number, address);
-								list.add(data);
-
-								Object data1[] = { name, number, address };
-								model0.addRow(data1);
-							}
+//						DefaultTableModel dmodel = (DefaultTableModel) table.getModel();
+						
+						System.out.println(rows);
+						String sql = "DELETE FROM client WHERE ROWNUM = ?";
+						ptst = con.prepareStatement(sql);
+						ptst.setInt(1, rows+1);
+						ptst.executeUpdate();
+						
+//						sql = sql + rows;
+//						rs = stmt.executeQuery(sql);
+//						sql = "commit";
+//						rs= stmt.executeQuery(sql);
+//						model0.removeRow(rows-1);
+						
+						
+						System.out.println(removeNum);
+						for(int i=removeNum-1;i>=0;i--) {
+							model0.removeRow(i);
+							
 						}
-					} catch (Exception e) {
-						e.printStackTrace();
+						removeNum=0;
+						
+						
+						//repaint
+						String query= "SELECT * FROM CLIENT ORDER BY MNAME";
+						stmt=con.createStatement();
+						rs=stmt.executeQuery(query);
+						while(rs.next()) {
+							model0.addRow(new Object[] {rs.getString("MNAME"),rs.getString("MPHONE"),rs.getString("MADDRESS")});
+							removeNum++;
+						}
+						JOptionPane.showMessageDialog(new JButton(), "삭제되었습니다.");
 					}
 				} catch (Exception e) {
 					e.printStackTrace();

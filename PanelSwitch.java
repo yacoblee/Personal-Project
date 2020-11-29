@@ -72,6 +72,7 @@ public class PanelSwitch extends JFrame {
 			revalidate();
 			repaint();
 			break;
+			
 		case "Manage":
 			win.manage = new Manage(win);
 			getContentPane().removeAll();

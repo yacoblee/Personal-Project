@@ -128,40 +128,37 @@ public class Book extends JPanel {
 		add(bthome);
 		
 		
-//		try {
-//			ArrayList<MemberVo> list = new ArrayList<MemberVo>();
-//
-//			String query = "SELECT * FROM CLIENT ";
-//
-//			System.out.println("SQL : " + query);
-//
-//			rs = stmt.executeQuery(query);
-//			rs.last();
-//			System.out.println("rs.getRow() : " + rs.getRow());
-//
-//			if (rs.getRow() == 0) {
-//				System.out.println("0 row selected...");
-//			} else {
-//				System.out.println(rs.getRow() + "rows selected");
-//				rs.first();
-//				while (rs.next()) {
-//					String name = rs.getString("MNAME");
-//					String number = rs.getString("MPHONE");
-//					String address = rs.getString("MADDRESS");
-//
-//					MemberVo data = new MemberVo(name, number, address);
-//					list.add(data);
-//					name = rs.getString("MNAME");
-//					number = rs.getString("MPHONE");
-//					address = rs.getString("MADDRESS");
-//
-//					Object data1[] = { name, number, address };
-//					model0.addRow(data1);
-//				}
-//			}
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
+		try { // first visible table
+			ArrayList<MemberVo> list = new ArrayList<MemberVo>();
+
+			String query = "SELECT * FROM CLIENT ";
+
+			System.out.println("SQL : " + query);
+
+			rs = stmt.executeQuery(query);
+			rs.last();
+			System.out.println("rs.getRow() : " + rs.getRow());
+
+			if (rs.getRow() == 0) {
+				System.out.println("0 row selected...");
+			} else {
+				System.out.println(rs.getRow() + "rows selected");
+				rs.first();
+				while (rs.next()) {
+					String name = rs.getString("MNAME");
+					String number = rs.getString("MPHONE");
+					String address = rs.getString("MADDRESS");
+
+					MemberVo data = new MemberVo(name, number, address);
+					list.add(data);
+
+					Object data1[] = { name, number, address };
+					model1.addRow(data1);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 		bthome.addActionListener(new ActionListener() {
 
