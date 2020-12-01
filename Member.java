@@ -46,7 +46,7 @@ public class Member extends JPanel {
 	String[] colNames = new String[] { "이름", "전화번호", "주소" };
 	DefaultTableModel model0 = new DefaultTableModel(colNames, 0);
 	public Member(PanelSwitch win) {
-//		dao = new MemberDao();
+
 
 		try {
 			Class.forName(driver);
