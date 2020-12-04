@@ -86,11 +86,14 @@ public class PanelSwitch extends JFrame {
 
 	public static void main(String[] args) {
 		
-		
 		win.login = new Login(win);
 	
 		win.add(win.login);
-
+		
+//		Manage manage = new Manage(null);
+//		Diallog dial = new Diallog();
+		
+		
 		win.setTitle("library");
 		win.setSize(1100, 800);
 		win.setVisible(true);

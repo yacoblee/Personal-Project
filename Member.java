@@ -39,14 +39,15 @@ public class Member extends JPanel {
 	private JTextField txname, txnum, txaddress;
 	private JLabel laname, lanum, laaddress;
 	static PanelSwitch sw;
-	static MemberDao dao;
-	
-	PreparedStatement ptst =null;
-	int removeNum =0;
+
+	String isbn;
+	public String a = isbn;
+	PreparedStatement ptst = null;
+	int removeNum = 0;
 	String[] colNames = new String[] { "이름", "전화번호", "주소" };
 	DefaultTableModel model0 = new DefaultTableModel(colNames, 0);
-	public Member(PanelSwitch win) {
 
+	public Member(PanelSwitch win) {
 
 		try {
 			Class.forName(driver);
@@ -58,8 +59,6 @@ public class Member extends JPanel {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-//		sw = new PanelSwitch();//data connection.
-
 		setLayout(null);
 
 		Font f1 = new Font("한컴 윤체L", Font.BOLD, 15);
@@ -122,16 +121,15 @@ public class Member extends JPanel {
 		add(bthome);
 
 		try { // first visible table
-		
 
 			String query = "SELECT * FROM CLIENT ORDER BY MNAME";
-			stmt= con.createStatement();
+			stmt = con.createStatement();
 			rs = stmt.executeQuery(query);
-				while (rs.next()) {
-					model0.addRow(new Object[] {rs.getString("MNAME"),rs.getString("MPHONE"),rs.getString("MADDRESS") });
-					removeNum++;
-				}
-			
+			while (rs.next()) {
+				model0.addRow(new Object[] { rs.getString("MNAME"), rs.getString("MPHONE"), rs.getString("MADDRESS") });
+				removeNum++;
+			}
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -144,29 +142,29 @@ public class Member extends JPanel {
 					String name = txname.getText();
 					String number = txnum.getText().toString();
 					String address = txaddress.getText();
-					
+
 //					System.out.println(name + " " + number + " " + address);
-					
+
 					if (name.length() >= 1 && number.length() > 10 && address.length() >= 5) {
 
 						String sql = "INSERT INTO CLIENT VALUES('" + name + "','" + number + "','" + address + "')";
 						System.out.println(sql);
 						rs = stmt.executeQuery(sql);
-						sql ="commit";
-						rs=stmt.executeQuery(sql);
+						sql = "commit";
+						rs = stmt.executeQuery(sql);
 						System.out.println(sql);
-						
-						
-						for(int i=removeNum-1;i>=0;i--) {
+
+						for (int i = removeNum - 1; i >= 0; i--) {
 							model0.removeRow(i);
 						}
-						removeNum=0;
-						
-						String query= "SELECT * FROM CLIENT ORDER BY MNAME";
-						stmt=con.createStatement();
-						rs=stmt.executeQuery(query);
-						while(rs.next()) {
-							model0.addRow(new Object[] {rs.getString("MNAME"),rs.getString("MPHONE"),rs.getString("MADDRESS")});
+						removeNum = 0;
+
+						String query = "SELECT * FROM CLIENT ORDER BY MNAME";
+						stmt = con.createStatement();
+						rs = stmt.executeQuery(query);
+						while (rs.next()) {
+							model0.addRow(new Object[] { rs.getString("MNAME"), rs.getString("MPHONE"),
+									rs.getString("MADDRESS") });
 							removeNum++;
 						}
 						txname.setText("");
@@ -175,8 +173,6 @@ public class Member extends JPanel {
 					} else {
 						JOptionPane.showConfirmDialog(null, "입력 정보를 확인해주세요");
 					}
-
-									
 
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -187,7 +183,7 @@ public class Member extends JPanel {
 
 		btEx.addActionListener(new ActionListener() {
 			// remove rows
-			
+
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				try {
@@ -196,35 +192,27 @@ public class Member extends JPanel {
 						JOptionPane.showMessageDialog(table, "행을 선택해주세요");
 						return;
 					} else {
-//						DefaultTableModel dmodel = (DefaultTableModel) table.getModel();
-						
+
 						System.out.println(rows);
 						String sql = "DELETE FROM client WHERE ROWNUM = ?";
 						ptst = con.prepareStatement(sql);
-						ptst.setInt(1, rows+1);
+						ptst.setInt(1, rows + 1);
 						ptst.executeUpdate();
-						
-//						sql = sql + rows;
-//						rs = stmt.executeQuery(sql);
-//						sql = "commit";
-//						rs= stmt.executeQuery(sql);
-//						model0.removeRow(rows-1);
-						
-						
+
 						System.out.println(removeNum);
-						for(int i=removeNum-1;i>=0;i--) {
+						for (int i = removeNum - 1; i >= 0; i--) {
 							model0.removeRow(i);
-							
+
 						}
-						removeNum=0;
-						
-						
-						//repaint
-						String query= "SELECT * FROM CLIENT ORDER BY MNAME";
-						stmt=con.createStatement();
-						rs=stmt.executeQuery(query);
-						while(rs.next()) {
-							model0.addRow(new Object[] {rs.getString("MNAME"),rs.getString("MPHONE"),rs.getString("MADDRESS")});
+						removeNum = 0;
+
+						// repaint
+						String query = "SELECT * FROM CLIENT ORDER BY MNAME";
+						stmt = con.createStatement();
+						rs = stmt.executeQuery(query);
+						while (rs.next()) {
+							model0.addRow(new Object[] { rs.getString("MNAME"), rs.getString("MPHONE"),
+									rs.getString("MADDRESS") });
 							removeNum++;
 						}
 						JOptionPane.showMessageDialog(new JButton(), "삭제되었습니다.");
@@ -232,9 +220,8 @@ public class Member extends JPanel {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-				
-				//remove Query
 
+				// remove Query
 
 			}
 		});

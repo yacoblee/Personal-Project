@@ -9,9 +9,12 @@ public class MemberVo {
 	private String bwriter;
 	private String bpublish;
 	private String rcofirm;
-
+	
 	public MemberVo() {
-
+		
+	}
+	public MemberVo(String isbn) {
+		this.isbn = isbn;
 	}
 
 	public MemberVo(String name, String number, String address) {
