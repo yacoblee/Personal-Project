@@ -6,6 +6,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -26,7 +27,7 @@ public class Diallog extends JFrame {
 	private ResultSet rs;
 	
 	private static final long serialVersionUID = 1L;
-	
+
 	private JFrame frame;
 	private JTextField textField;
 	private JTextField textField_1;
@@ -34,13 +35,10 @@ public class Diallog extends JFrame {
 	String[] colNames = new String[] { "전화번호", "대여목록", "도서누적회차" };
 	DefaultTableModel model = new DefaultTableModel(colNames, 0);
 	int removeNum = 0;
-	static Manage manage;
+	
 
 
 	public Diallog() {
-
-		manage = new Manage(null);
-		//Rent panel
 		
 		try {
 			Class.forName(driver);
@@ -57,6 +55,8 @@ public class Diallog extends JFrame {
 		frame.setSize(581, 726);
 		frame.getContentPane().setLayout(null);
 		
+		ImageIcon icon1= new ImageIcon("C:\\Users\\yacob\\Desktop\\eclipse_data\\PeronalProject\\image\\search.png");
+		ImageIcon icon2= new ImageIcon("C:\\Users\\yacob\\Desktop\\eclipse_data\\PeronalProject\\image\\rental.png");
 		JPanel panel = new JPanel();
 		panel.setBounds(14, 12, 535, 655);
 		frame.getContentPane().add(panel);
@@ -67,9 +67,10 @@ public class Diallog extends JFrame {
 		label.setBounds(60, 142, 80, 18);
 		panel.add(label);
 		
-		JButton btRent = new JButton("대여");
+		JButton btRent = new JButton("",icon2);
 		btRent.setFont(new Font("돋움체", Font.BOLD, 17));
 		btRent.setBounds(416, 190, 105, 50);
+		btRent.setSelectedIcon(icon2);
 		panel.add(btRent);
 		
 		textField = new JTextField();
@@ -97,10 +98,11 @@ public class Diallog extends JFrame {
 		scrollPane.setViewportView(jtable);
 		panel_1.add(scrollPane);
 		
-		JButton btSearch = new JButton("조회");
+		JButton btSearch = new JButton("",icon1);
 		btSearch.setFont(new Font("돋움체", Font.BOLD, 17));
 		btSearch.setBounds(296, 190, 105, 50);
-		panel.add(btSearch);
+		btSearch.setSelectedIcon(icon1);
+		panel.add(btSearch); 
 		
 		btSearch.addActionListener(new ActionListener() {
 			

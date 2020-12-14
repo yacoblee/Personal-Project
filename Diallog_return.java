@@ -33,7 +33,7 @@ public class Diallog_return extends JFrame {
 	private JFrame frame;
 	private JTextField textField;
 	private JTextField textField_1;
-	static PanelSwitch sw;
+	
 	String[] colNames = new String[] { "책 제목", "전화번호", "대여일자","반납일자"};
 	DefaultTableModel model = new DefaultTableModel(colNames, 0);
 	int removeNum = 0;

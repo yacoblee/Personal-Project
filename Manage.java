@@ -4,18 +4,17 @@ import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 
 import java.awt.Color;
-import java.awt.EventQueue;
+
 import java.awt.Font;
 import java.awt.SystemColor;
-import java.awt.Window;
-import java.awt.Dialog.ModalityType;
+
 import java.awt.event.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.ArrayList;
+
 
 public class Manage extends JPanel {
 
@@ -29,9 +28,9 @@ public class Manage extends JPanel {
 //==================================================================
 	private static final long serialVersionUID = 1L;
 	private JButton btSearch, btRent, btReturn, btHome;
-	private JTextField textField, textField_1;
+	private JTextField textField;
 	public JTable jtable;
-	private JFrame frame;
+	
 	static Diallog dial;
 	static PanelSwitch sw;
 	static Diallog_return dial2;
@@ -78,6 +77,11 @@ public class Manage extends JPanel {
 		setVisible(true);
 		setLayout(null);
 
+		ImageIcon icon1 = new ImageIcon("C:\\Users\\yacob\\Desktop\\eclipse_data\\PeronalProject\\image\\search.png");
+		ImageIcon icon2= new ImageIcon("C:\\Users\\yacob\\Desktop\\eclipse_data\\PeronalProject\\image\\rental1.png");
+		ImageIcon icon3 = new ImageIcon("C:\\Users\\yacob\\Desktop\\eclipse_data\\PeronalProject\\image\\revise.png");
+		ImageIcon icon4 = new ImageIcon("C:\\Users\\yacob\\Desktop\\eclipse_data\\PeronalProject\\image\\home.png");
+		
 		JPanel jpn1 = new JPanel();
 		jpn1.setLayout(null);
 		jpn1.setBorder(new LineBorder(Color.BLACK));
@@ -92,9 +96,10 @@ public class Manage extends JPanel {
 		combo.setBounds(157, 109, 66, 24);
 		jpn1.add(combo);
 
-		btSearch = new JButton("¡∂»∏");
+		btSearch = new JButton("",icon1);
 		btSearch.setFont(new Font("±º∏≤", Font.BOLD, 17));
 		btSearch.setBounds(491, 97, 125, 46);
+		btSearch.setSelectedIcon(icon1);
 		jpn1.add(btSearch);
 
 		btSearch.addActionListener(new ActionListener() {
@@ -142,19 +147,22 @@ public class Manage extends JPanel {
 			}
 		});
 
-		btRent = new JButton("¥Îø©");
+		btRent = new JButton("",icon2);
 		btRent.setFont(new Font("±º∏≤", Font.BOLD, 17));
 		btRent.setBounds(620, 97, 125, 46);
+		btRent.setSelectedIcon(icon2);
 		jpn1.add(btRent);
 
-		btReturn = new JButton("π›≥≥");
+		btReturn = new JButton("",icon3);
 		btReturn.setFont(new Font("±º∏≤", Font.BOLD, 17));
 		btReturn.setBounds(756, 97, 125, 46);
+		btReturn.setSelectedIcon(icon3);
 		jpn1.add(btReturn);
 
-		btHome = new JButton("∏ﬁ¿Œ»®");
+		btHome = new JButton("",icon4);
 		btHome.setFont(new Font("±º∏≤", Font.BOLD, 17));
 		btHome.setBounds(756, 194, 125, 46);
+		btHome.setSelectedIcon(icon4);
 		jpn1.add(btHome);
 
 		btHome.addActionListener(new ActionListener() {

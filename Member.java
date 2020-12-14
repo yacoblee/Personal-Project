@@ -1,6 +1,6 @@
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.ScrollPane;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
@@ -8,11 +8,10 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -33,8 +32,8 @@ public class Member extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private JButton btIm, btEx, bthome;
-	private JScrollPane textscroll;
+	private JButton btIm, btEx, bthome,btchange;
+
 
 	private JTextField txname, txnum, txaddress;
 	private JLabel laname, lanum, laaddress;
@@ -62,12 +61,24 @@ public class Member extends JPanel {
 		setLayout(null);
 
 		Font f1 = new Font("한컴 윤체L", Font.BOLD, 15);
-
-		btIm = new JButton("등록");
+		
+		ImageIcon icon1= new ImageIcon("C:\\Users\\yacob\\Desktop\\eclipse_data\\PeronalProject\\image\\enroll.png");
+		ImageIcon icon2= new ImageIcon("C:\\Users\\yacob\\Desktop\\eclipse_data\\PeronalProject\\image\\delete.png");
+		ImageIcon icon3= new ImageIcon("C:\\Users\\yacob\\Desktop\\eclipse_data\\PeronalProject\\image\\revise.png");
+		ImageIcon icon4= new ImageIcon("C:\\Users\\yacob\\Desktop\\eclipse_data\\PeronalProject\\image\\home.png");
+		
+		btIm = new JButton("",icon1);
 		btIm.setBounds(816, 80, 127, 43);
-		btEx = new JButton("삭제");
+		btIm.setPressedIcon(icon1);
+		
+		btEx = new JButton("",icon2);
 		btEx.setBounds(816, 147, 127, 43);
-
+		btEx.setSelectedIcon(icon2);
+		
+		btchange = new JButton("",icon3);
+		btchange.setBounds(816, 204, 127, 43);
+		btchange.setSelectedIcon(icon3);
+		
 		laname = new JLabel("이름");
 		laname.setFont(f1);
 		laname.setBounds(714, 368, 62, 18);
@@ -88,9 +99,10 @@ public class Member extends JPanel {
 		txaddress = new JTextField();
 		txaddress.setBounds(816, 486, 224, 32);
 
-		bthome = new JButton("홈으로");
+		bthome = new JButton("",icon4);
 		bthome.setBounds(913, 645, 127, 43);
-
+		bthome.setSelectedIcon(icon4);
+		
 		JSeparator separator = new JSeparator();
 		separator.setBounds(0, 12, 1080, 17);
 		add(separator);
@@ -119,7 +131,7 @@ public class Member extends JPanel {
 		add(laaddress);
 		add(txaddress);
 		add(bthome);
-
+		add(btchange);
 		try { // first visible table
 
 			String query = "SELECT * FROM CLIENT ORDER BY MNAME";
@@ -223,6 +235,49 @@ public class Member extends JPanel {
 
 				// remove Query
 
+			}
+		});
+		
+		btchange.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String name = txname.getText();
+				String number = txnum.getText().toString();
+				String address = txaddress.getText();
+				String index = "";
+				
+				int rows = table.getSelectedRow();
+				int column = table.getSelectedColumn();
+				String a = (String) table.getModel().getValueAt(rows,column);
+				
+				try {
+					if (column == 0)
+						index = "set MNAME = '" + name + "' where MNAME = '" + a + "'";
+					else if (column == 1)
+						index = "set MPHONE = '" + number + "' where MPHONE = '" + a + "'";
+					else if (column == 2)
+						index = "set MADDRESS = '" + address + "' where MADDRESS = '" + a + "'";
+					String sql = "update CLIENT "+ index;
+					System.out.println(sql);
+					
+					stmt = con.createStatement();
+					rs = stmt.executeQuery(sql);
+					
+					
+								String query = "SELECT * FROM CLIENT ORDER BY MNAME";
+								stmt = con.createStatement();
+								rs = stmt.executeQuery(query);
+								while (rs.next()) {
+									model0.addRow(new Object[] { rs.getString("MNAME"), rs.getString("MPHONE"),
+											rs.getString("MADDRESS") });
+									removeNum++;
+								}
+				} catch (Exception e2) {
+					e2.printStackTrace();
+					JOptionPane.showConfirmDialog(new JButton(), "수정할 내용을 입력해주세요");
+				}
+				
 			}
 		});
 

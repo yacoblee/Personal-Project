@@ -1,8 +1,6 @@
 import java.awt.Color;
-import java.awt.Dimension;
+
 import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
@@ -25,7 +23,7 @@ public class Login extends JPanel {
 	private JTextField text;
 	private JPasswordField passfield;
 	private String id = "Green";
-	private String password = "green";
+	private String password = "green1234";
 	private Font f1, f2;
 
 	public String getId() {
@@ -40,7 +38,7 @@ public class Login extends JPanel {
 
 		setBounds(0, 0, 1080, 740);
 
-		ImageIcon ic = new ImageIcon("C:\\Users\\pc\\Desktop\\bookimage.jpg");
+		ImageIcon ic = new ImageIcon("C:\\Users\\yacob\\Desktop\\bookimage.jpg");
 		JLabel lbImage = new JLabel(ic);
 		add(lbImage);
 
@@ -75,10 +73,16 @@ public class Login extends JPanel {
 		passfield.setBounds(450, 240, 200, 30);
 		lbImage.add(passfield);
 
-		JButton btJoin = new JButton("·Î±×ÀÎ");
+		ImageIcon icon = new ImageIcon("C:\\Users\\yacob\\Desktop\\eclipse_data\\PeronalProject\\image\\login.png");
+		
+		JButton btJoin = new JButton("",icon);
 		btJoin.setSize(80, 50);
 		btJoin.setLocation(665, 200);
+		btJoin.setPressedIcon(icon);
 		lbImage.add(btJoin);
+		
+		btJoin.setBorderPainted(false);
+//		btJoin.setContentAreaFilled(true);
 
 		btJoin.addMouseListener(new MouseAdapter() {
 			@SuppressWarnings("deprecation")
@@ -106,20 +110,3 @@ public class Login extends JPanel {
 	}
 
 }
-
-//class ImagePanel extends JPanel {
-//	/**
-//	 * 
-//	 */
-//	private static final long serialVersionUID = 1L;
-//	private Image img;
-//
-//	public ImagePanel(Image img) {
-//		this.img = img;
-//		setSize(new Dimension(img.getWidth(null), img.getHeight(null)));
-//	}
-//
-//	public void painComponent(Graphics g) {
-//		g.drawImage(img, 0, 0, null);
-//	}
-//}

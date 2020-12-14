@@ -1,4 +1,4 @@
-import java.awt.Color;
+
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -11,11 +11,11 @@ import javax.swing.JPanel;
 
 public class MainGui extends JPanel {
 	private static final long serialVersionUID = 1L;
-	private Font f1, f2;
+	private Font f1;
 	
 	public MainGui (PanelSwitch win) {
 		
-		ImageIcon ic = new ImageIcon("C:\\Users\\pc\\Desktop\\bookimage.jpg");
+		ImageIcon ic = new ImageIcon("C:\\Users\\yacob\\Desktop\\bookimage.jpg");
 		JLabel lbImage = new JLabel(ic);	
 		add(lbImage);
 		
@@ -23,12 +23,22 @@ public class MainGui extends JPanel {
 
 		lbImage.setSize(1080,700);
 		setLocation(0,0);
+		
+		ImageIcon icon1= new ImageIcon("C:\\Users\\yacob\\Desktop\\eclipse_data\\PeronalProject\\image\\member.png");
+		ImageIcon icon2= new ImageIcon("C:\\Users\\yacob\\Desktop\\eclipse_data\\PeronalProject\\image\\manage.png");
+		ImageIcon icon3= new ImageIcon("C:\\Users\\yacob\\Desktop\\eclipse_data\\PeronalProject\\image\\rental.png");
+		ImageIcon icon4= new ImageIcon("C:\\Users\\yacob\\Desktop\\eclipse_data\\PeronalProject\\image\\exit.png");
 
 		
-		JButton bt1 =new JButton("회원관리"); //목록과 관리(가입,조회)
-		JButton bt2	=new JButton("도서관리");
-		JButton bt3 =new JButton("대여 관리");
-		JButton exi =new JButton("종료");
+		JButton bt1 =new JButton("",icon1); //목록과 관리(가입,조회)
+		JButton bt2	=new JButton("",icon2);
+		JButton bt3 =new JButton("",icon3);
+		JButton exi =new JButton("",icon4);
+		
+		bt1.setSelectedIcon(icon1);
+		bt1.setSelectedIcon(icon2);
+		bt1.setSelectedIcon(icon3);
+		exi.setSelectedIcon(icon4);
 		
 		bt1.setFont(f1);
 		bt2.setFont(f1);
